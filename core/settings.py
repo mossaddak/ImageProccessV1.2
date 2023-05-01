@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-)rf=_+sumw5p8h&7)(30n_a7^m6xc(6@noig-kioe#tyvt=egx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['.vercel.app' , '.now.sh']
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
@@ -195,6 +195,7 @@ EMAIL_USE_TLS = True#oke
 # EMAIL_HOST_PASSWORD = 'Tpy@475631'#leave here your genuine password of your email. keep it in mind, as the password should in encrypted condition 
 # EMAIL_USE_SSL = True#oke
 
+
 TIME_ZONE = 'Asia/Dhaka'
 
 # CORS_ALLOW_ALL_ORIGINS = True
@@ -210,3 +211,11 @@ TIME_ZONE = 'Asia/Dhaka'
 # CORS_ORIGIN_WHITELIST = [
 #     'http://localhost:3000',
 # ]
+
+
+
+import os
+STATIC_URL = 'static/'
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+

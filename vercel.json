@@ -6,8 +6,9 @@
         "dest": "/static/$1"
       },
       {
-        "src": "/.*",
-        "dest": "/wsgi.py"
+        "src": "/(.*)",
+        "dest": "core/wsgi.py"
       }
     ]
   }
+

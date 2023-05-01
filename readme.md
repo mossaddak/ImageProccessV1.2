@@ -111,4 +111,4 @@ required field:
 
 
 # Payment Method
-api_key = sk_test_51Mei6tA4Xf1XOr7ROyXtE7oBA3CUKjMg3jhpbjcc9EgCzFENvPxQfRxe0caqLIvHokpUNwLEazVeJMmkeHgW6G1y00fHxP7I11
+api_key = 

@@ -32,11 +32,11 @@ ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = []
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000',
+# ]
 
 # CORS_ORIGIN_WHITELIST = [
 #     'http://google.com',
@@ -59,7 +59,8 @@ CORS_ALLOW_HEADERS = [
     'Access-Control-Allow-Headers',
     'X-Requested-With',
     'Access-Control-Request-Method',
-    'Access-Control-Request-Headers'
+    'Access-Control-Request-Headers',
+    'authorization',
 ]
 
 CORS_ALLOW_METHODS = [
@@ -92,11 +93,11 @@ INSTALLED_APPS = [
     'payment_method',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
+
+
+
+
+
 
 MIDDLEWARE = [
      #cors headers
@@ -202,11 +203,27 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
+
 #increasing JWT authentication time=======================================>
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=20),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
+
+
+
+
+
+
 
 AUTH_USER_MODEL = 'account.User'
 

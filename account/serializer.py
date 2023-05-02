@@ -142,10 +142,7 @@ class LoginSerializer(serializers.Serializer):
         return { 
             'message': 'Login success',
             'data':serialized_user,
+            'refresh_token': str(refresh),
             'access': str(refresh.access_token),
             'is_superuser': user.is_superuser
         }
-    
-
-
-

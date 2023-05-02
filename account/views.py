@@ -83,6 +83,7 @@ class SingUp(APIView):
                     {   
                         'message':"Your account is successfully created",
                         'data':serializer,
+                        'refresh_token': str(refresh),
                         'access_token':str(refresh.access_token)
                     },status = status.HTTP_201_CREATED
                 )
@@ -136,6 +137,7 @@ class VerifyOTPview(APIView):
                     return Response(
                         {
                             'message':"Your account is verified now.",
+                            'refresh_token': str(refresh),
                             'access_token':str(refresh.access_token)
                         },status = status.HTTP_201_CREATED
                     )
@@ -275,4 +277,3 @@ class VerifiCationOtpSentView(APIView):
                 },status = status.HTTP_200_OK
             
             )
-

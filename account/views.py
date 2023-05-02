@@ -38,6 +38,21 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import (
     permissions
 )
+from rest_framework import parsers
+
+
+
+from django.http import HttpResponse
+
+def my_view(request):
+    response = HttpResponse()
+    response['Access-Control-Allow-Origin'] = '*'
+    print(response)
+    return response
+
+
+
+
 
 
 class ProfilePictureEdit(BasePermission):
@@ -162,13 +177,15 @@ class LoginView(APIView):
 class ProfileView(APIView): 
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
+    
 
     def get(self, request):
         users = User.objects.all()
         user = request.user
         serializer = UserSerializer(user)
-        return Response(serializer.data)
-    
+        response = Response(serializer.data)
+        return response
+
     def patch(self, request):
         try:
             userid = request.user.id
@@ -177,46 +194,51 @@ class ProfileView(APIView):
             serializer = UserSerializer(user, data=data, partial=True, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
-                return Response(
+                response = Response(
                     {
                         'user': serializer.data,
                         'message': "Your profile has been updated"
                     },
                     status=status.HTTP_200_OK
                 )
+                return response
             else:
-                return Response(
+                response = Response(
                     {
                         'user': serializer.errors,
                         'message': "Your profile could not be updated"
                     },
                     status=status.HTTP_400_BAD_REQUEST
                 )
+                return response
 
         except IntegrityError:
-            return Response(
+            response = Response(
                 {
                     'user': None,
                     'message': "A user with that username already exists"
                 },
                 status=status.HTTP_409_CONFLICT
             )
+            return response
         
         except Exception as e:
             print(e)
-            return Response(
+            response = Response(
                 {
                     'user': None,
                     'message': "An error occurred while updating your profile"
                 },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            ) 
+            )
+            return response
 #Profile picture
 
 
 class ProfilePictureView(ModelViewSet):
     serializer_class = ProfilePictureSerializer
     queryset = ProfilePicture.objects.all()
+    parser_classes = [parsers.FormParser, parsers.MultiPartParser]
     authentication_classes=[JWTAuthentication]
     permission_classes = [IsAuthenticated,ProfilePictureEdit]
 

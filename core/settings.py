@@ -37,20 +37,38 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
-CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ORIGIN_WHITELIST = [
+#     'http://google.com',
+#     'http://hostname.example.com',
+#     'http://localhost:8000',
+#     'http://127.0.0.1:9000'
+# ]
+
+
+
+
+#CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS = [
     'access-control-allow-origin',
     'content-type',
+    'Accept',
+    'Accept-Encoding',
+    'User-Agent',
+    'Access-Control-Allow-Headers',
+    'X-Requested-With',
+    'Access-Control-Request-Method',
+    'Access-Control-Request-Headers'
 ]
 
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
-    'OPTIONS',
     'PATCH',
     'POST',
     'PUT',
+    'HEAD',
 ]
 
 
@@ -88,7 +106,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
-   
 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

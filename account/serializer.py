@@ -15,6 +15,9 @@ from app.serializer import(
 )
 from rest_framework.response import Response
 from django.contrib.auth.hashers import check_password
+from rest_framework import status
+
+
 
 
 def auto_user(set_email):

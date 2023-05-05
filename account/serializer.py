@@ -118,33 +118,20 @@ class LoginSerializer(serializers.Serializer):
 
     def validate(self, data):
         email = data['email']
-        if not User.objects.filter(email = email).exists():
-             raise serializers.ValidationError("Account not found")
-        user = User.objects.filter(email=email)
-        user = user[0]
+        if not User.objects.filter(email=email).exists():
+            raise serializers.ValidationError("Account not found")
+        user = User.objects.filter(email=email)[0]
+        if not authenticate(email=email, password=data['password']):
+            raise serializers.ValidationError("Invalid credentials")
         return data
-    
-    
+
     def get_jwt_token(self, data):
         user = authenticate(email=data['email'], password=data['password'])
-        if not user:
-            return {
-                'message': 'Invalid credentials',
-                'data': {}
-            }
-
-        if not check_password(data['password'], user.password):
-            return {
-                'message': 'Invalid credentials',
-                'data': {}
-            }
-
         refresh = RefreshToken.for_user(user)
-        print("Serializer data=====================================>",user)
         serialized_user = UserSerializer(user).data
-        return { 
+        return {
             'message': 'Login success',
-            'data':serialized_user,
+            'data': serialized_user,
             'refresh_token': str(refresh),
             'access': str(refresh.access_token)
         }

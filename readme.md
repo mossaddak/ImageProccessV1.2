@@ -41,7 +41,7 @@ required fields:
 
 # Profile Picture
 
-post, get, delete, patch => http://127.0.0.1:8000/api/profile-picture/
+post, get, delete, patch => http://127.0.0.1:8000/api/account/profile-picture/
 
 required field: img
 

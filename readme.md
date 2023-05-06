@@ -4,7 +4,6 @@ post => http://127.0.0.1:8000/api/account/sing-up/
 required field: 
 
     {
-        "username":"mossaddak",
         "email":"demomail@gmail.com",
         "password":"1234",
         "first_name":"Mossaddak",
@@ -36,7 +35,7 @@ post => http://127.0.0.1:8000/api/account/login/
 required fields:
 
     {
-        "username":"mossaddak1",
+        "email":"10000mossaddak1@gmail.com",
         "password":"1234"
     }
 

@@ -133,5 +133,5 @@ class LoginSerializer(serializers.Serializer):
             'message': 'Login success',
             'data': serialized_user,
             'refresh_token': str(refresh),
-            'access': str(refresh.access_token)
+            'access_token': str(refresh.access_token)
         }

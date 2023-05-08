@@ -80,8 +80,8 @@ required field: input(form data)
 
 note: only super admin has permission of GET
 
-# Password Required
-post => http://127.0.0.1:8000/api/reset-password/
+# Reset Password
+post => http://127.0.0.1:8000/api/recovery-account/reset-password/
 
 required field:
     {
@@ -89,7 +89,7 @@ required field:
     }
 
 # Reset password send token
-post => http://127.0.0.1:8000/api/reset-password/
+post => http://127.0.0.1:8000/api/recovery-account/reset-password-send-token/
 
 required field:
 

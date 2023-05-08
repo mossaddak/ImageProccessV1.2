@@ -72,6 +72,8 @@ class ImageResolutionView(APIView):
                 LastImg = ImageProcess.objects.last()
                 LastImgUrl = LastImg.input.url
 
+                
+
                 #image process__________________________________________________
                 img = cv2.imread(LastImg.input.path)
                 rows, cols = img.shape[:2]
@@ -98,6 +100,11 @@ class ImageResolutionView(APIView):
                 img = Image.open(LastImg.input.path)
                 R = remove(img)
                 R.save(f'media/bg_remove{LastImg.pk}.png')
+
+                #image to eps___________________________________________________
+                img = Image.open(LastImg.input.path)
+                img = img.convert('RGB')
+                img.save(f'media/eps_image{LastImg.pk}.eps', 'eps')
 
                 # Open the image
                 image = Image.open(img_data)
@@ -134,6 +141,9 @@ class ImageResolutionView(APIView):
                     pdf = f'new_img_pdf{LastImg.pk}.pdf',
                     bg_remove = f'bg_remove{LastImg.pk}.png',
                     svg = f'image{LastImg.pk}.svg',
+
+                    #eps
+                    eps = f'eps_image{LastImg.pk}.eps',
 
                     #re-sizing
                     business_card = request.FILES.get('business_card', None),

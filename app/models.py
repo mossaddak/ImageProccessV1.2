@@ -14,6 +14,7 @@ class ImageProcess(models.Model):
     bg_remove = models.ImageField(null=True, blank=True, verbose_name="Background Removed Image")
     pdf = models.FileField(blank=True, null=True, verbose_name="Pdf")
     svg = models.FileField(blank=True, null=True, verbose_name="Svg")
+    eps = models.FileField(blank=True, null=True, verbose_name="Eps")
 
     #resizing
     business_card = models.ImageField(null=True, blank=True)

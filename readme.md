@@ -111,3 +111,12 @@ required field:
 
 # Payment Method
 api_key = 
+
+post => http://127.0.0.1:8000/api/payment-method/stripe-payment/
+
+required field:
+
+    {
+        "amount": 34,
+        "token": "4242424242424242"
+    }

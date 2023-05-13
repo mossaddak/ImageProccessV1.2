@@ -37,7 +37,7 @@ class StripePaymentView(APIView):
             user_email = request.user.email
             user = User.objects.get(email=user_email)
             user.is_subscribed = True
-            user.save
+            user.save()
 
 
             # Create a charge on Stripe

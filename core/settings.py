@@ -226,7 +226,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'#oke
 EMAIL_HOST = 'smtp.gmail.com'#oke
 
 EMAIL_PORT = '587'#oke
-EMAIL_HOST_USER = ''#leave here your genuine email
+EMAIL_HOST_USER = 'lawyertrive@gmail.com'#leave here your genuine email
 #EMAIL_HOST_PASSWORD = 'zqrgvttkmlpxuqjy'#leave here your genuine password of your email. keep it in mind, as the password should in encrypted condition 
 EMAIL_HOST_PASSWORD = 'zqrgvttkmlpxuqjy'
 EMAIL_USE_TLS = True#oke
@@ -247,7 +247,7 @@ TIME_ZONE = 'Asia/Dhaka'
 
 #CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ORIGIN_WHITELIST  = [
-#     "https://example.com",
+#     "https://example.com",  
 #     "https://sub.example.com",
 #     "http://localhost:3000",
 #     "http://127.0.0.1:8000",

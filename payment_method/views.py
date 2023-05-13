@@ -6,6 +6,9 @@ from rest_framework.views import APIView
 from .models import(
     Charge
 )
+from account.models import(
+    User
+)
 from .serializer import(
     ChargeSerializer
 )
@@ -17,27 +20,28 @@ from rest_framework_simplejwt.authentication import (
     JWTAuthentication
 )
 
+
 # Create your views here.
 
 #my stripe
-#stripe.api_key = 'sk_test_51Mei6tA4Xf1XOr7ROyXtE7oBA3CUKjMg3jhpbjcc9EgCzFENvPxQfRxe0caqLIvHokpUNwLEazVeJMmkeHgW6G1y00fHxP7I11'
+stripe.api_key = 'sk_test_51Mei6tA4Xf1XOr7ROyXtE7oBA3CUKjMg3jhpbjcc9EgCzFENvPxQfRxe0caqLIvHokpUNwLEazVeJMmkeHgW6G1y00fHxP7I11'
 
 #client stripe
-stripe.api_key = 'pk_live_51KH8ijFQRvmRrSikRd1spAjHsW9D18eN8Sx8XpvolnHWbtiajBHT4klGOSLUdgEfHazQIHBTgw5IxnznGcWMIw8R00kwdrZrEk'
+#stripe.api_key = 'pk_live_51KH8ijFQRvmRrSikRd1spAjHsW9D18eN8Sx8XpvolnHWbtiajBHT4klGOSLUdgEfHazQIHBTgw5IxnznGcWMIw8R00kwdrZrEk'
 
 class StripePaymentView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     def post(self, request):
-
-        
         try:
+            user_email = request.user.email
+            user = User.objects.get(email=user_email)
+            user.is_subscribed = True
+            user.save
 
-            
-            # Get the amount from the request data
-            amount = request.data['amount']
 
             # Create a charge on Stripe
+            amount = request.data['amount']
             charge = stripe.Charge.create(
                 amount=int(amount * 100),
                 currency='usd',

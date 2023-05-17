@@ -85,12 +85,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
 
+    #'django.contrib.sites',
+
     'rest_framework',
     'corsheaders',
     'account',
     'app',
     'recovery_account',
     'payment_method',
+
+
+    #'payments', #new
 ]
 
 
@@ -265,6 +270,4 @@ TIME_ZONE = 'Asia/Dhaka'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-
 

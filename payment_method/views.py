@@ -44,7 +44,7 @@ class StripePaymentView(APIView):
             cvc = request.data['cvc']
             
 
-            if user.is_subscribed == True:
+            if user.is_subscribed == False:
 
                 print("Card Number===========================================", number)
                 # Create a test card token
@@ -78,17 +78,19 @@ class StripePaymentView(APIView):
                     exp_month=exp_month,
                     exp_year=exp_year,
                     cvc=cvc
-
                 )
-
                 
                 user.is_subscribed = True
                 user.save()
 
-
-                # Serialize and return the charge
-                serializer = ChargeSerializer(charge_obj)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(
+                    {
+                        "amount":charge_obj.amount,
+                        "created":charge_obj.created,
+                        "stripe_charge_id":charge_obj.stripe_charge_id
+                    },
+                    status=status.HTTP_201_CREATED
+                )
             
             else:
                 return Response(

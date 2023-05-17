@@ -117,6 +117,8 @@ post => http://127.0.0.1:8000/api/payment-method/stripe-payment/
 required field:
 
     {
-        "amount": 34,
-        "token": "4242424242424242"
+        "number":4242424242424242,
+        "exp_month":12,
+        "exp_year":2023,
+        "cvc":123
     }

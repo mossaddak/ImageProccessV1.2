@@ -1,9 +1,5 @@
 from rest_framework import serializers
 from .models import Charge
 
-class ChargeSerializer(serializers.ModelSerializer):
-
-    
-    class Meta:
-        model = Charge
-        fields = ("__all__")
+class VerifyPaymentSerializer(serializers.Serializer):
+    client_secret = serializers.CharField()

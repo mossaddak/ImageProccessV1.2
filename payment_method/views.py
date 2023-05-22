@@ -10,7 +10,7 @@ from account.models import(
     User
 )
 from .serializer import(
-    ChargeSerializer
+    VerifyPaymentSerializer
 )
 from django.conf import settings
 from rest_framework.permissions import (
@@ -19,6 +19,7 @@ from rest_framework.permissions import (
 from rest_framework_simplejwt.authentication import (
     JWTAuthentication
 )
+
 
 
 # Create your views here.
@@ -35,7 +36,6 @@ class StripePaymentView(APIView):
     authentication_classes = [JWTAuthentication]
     def post(self, request):
         try:
-
             user_email = request.user.email
             user = User.objects.get(email=user_email)
             
@@ -72,6 +72,57 @@ class StripePaymentView(APIView):
                         'message':"You all ready subscribed"
                     },status=status.HTTP_403_FORBIDDEN
                 )
+
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+    
+
+class VerifyPayment(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def post(self, request):
+        try:
+            
+            data = request.data
+            serializer = VerifyPaymentSerializer(data=data)
+
+            if serializer.is_valid():
+                client_secret = serializer.data["client_secret"]
+                charge = Charge.objects.get(client_secret=client_secret)
+
+                # user_serializer = UserSerializer(data=charge.user)
+                # print("user serilizer=======================>", user_serializer)
+
+                if charge.user.is_subscribed == False:
+                    charge.user.is_subscribed = True
+                    charge.user.save()
+                    print(charge.user.email)
+                    return Response(
+                        {
+                            "message":"You successfully subscribed",
+                            "data":{
+                               "id":charge.user.id,
+                                "username": charge.user.username,
+                                "first_name": charge.user.first_name,
+                                "last_name": charge.user.last_name,
+                                "email": charge.user.email,
+                                "is_superuser": charge.user.is_superuser,
+                                "is_subscribed": charge.user.is_subscribed,
+                                "is_verified": charge.user.is_verified
+
+                            }
+                        },
+                        status=status.HTTP_201_CREATED
+                    )
+                else:
+                    return Response(
+                        {
+                            "message":"You already subscribed"
+                        },
+                        status=status.HTTP_201_CREATED
+                    )
+
 
         except Exception as e:
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)

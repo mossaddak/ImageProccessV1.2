@@ -112,6 +112,18 @@ required field:
 # Payment Method
 api_key = 
 
+<b>Get payment intent:</b>
+
+just hit this api
+
 post => http://127.0.0.1:8000/api/payment-method/stripe-payment/
 
-<b>Just hit this api</b>
+<b>Verify Payment</b>
+
+post => http://127.0.0.1:8000/api/payment-method/verify-payment/
+
+    required fields:
+
+    {
+        "client_secret":"pi_3NAbZLHYlHkFMKo70U6LHthb_secret_KGdxxcic2dqF5UQHkyuAs8vmf"
+    }

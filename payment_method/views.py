@@ -88,8 +88,8 @@ class VerifyPayment(APIView):
             serializer = VerifyPaymentSerializer(data=data)
 
             if serializer.is_valid():
-                client_secret = serializer.data["client_secret"]
-                charge = Charge.objects.get(client_secret=client_secret)
+                payment_id = serializer.data["payment_id"]
+                charge = Charge.objects.get(payment_id=payment_id)
 
                 # user_serializer = UserSerializer(data=charge.user)
                 # print("user serilizer=======================>", user_serializer)

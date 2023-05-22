@@ -116,7 +116,7 @@ api_key =
 
 just hit this api
 
-post => http://127.0.0.1:8000/api/payment-method/stripe-payment/
+post => http://127.0.0.1:8000/api/payment-method/get-payment-intent/
 
 <b>Verify Payment</b>
 

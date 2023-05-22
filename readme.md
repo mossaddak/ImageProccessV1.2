@@ -114,11 +114,4 @@ api_key =
 
 post => http://127.0.0.1:8000/api/payment-method/stripe-payment/
 
-required field:
-
-    {
-        "number":4242424242424242,
-        "exp_month":12,
-        "exp_year":2023,
-        "cvc":123
-    }
+<b>Just hit this api</b>

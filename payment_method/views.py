@@ -38,56 +38,30 @@ class StripePaymentView(APIView):
 
             user_email = request.user.email
             user = User.objects.get(email=user_email)
-            number = request.data['number']
-            exp_month = request.data['exp_month']
-            exp_year = request.data['exp_year']
-            cvc = request.data['cvc']
             
-
             if user.is_subscribed == False:
-
-                print("Card Number===========================================", number)
-                # Create a test card token
-                token = stripe.Token.create(
-                    card={
-                        'number': number,
-                        'exp_month': exp_month,
-                        'exp_year': exp_year,
-                        'cvc': cvc
-                    }
-                )
-
-                # Use the generated token for testing
-                source_token = token.id
-
-                # Create a charge on Stripe
-                amount = 200
-                charge_obj = stripe.Charge.create(
-                    amount=int(amount * 100),
+                c_amount = 1
+                intent = stripe.PaymentIntent.create(
+                    amount=100*c_amount,
                     currency='usd',
-                    source=source_token
+                    payment_method_types=['card'],
                 )
 
-                # Create a charge in the database
-                charge_obj = Charge.objects.create(
-                    amount=amount,
-                    stripe_charge_id=charge_obj.id,
+                Charge.objects.create(
                     user=request.user,
-                    currency='usd',
-                    number=number,
-                    exp_month=exp_month,
-                    exp_year=exp_year,
-                    cvc=cvc
+                    amount = c_amount,
+                    client_secret = intent['client_secret'],
+                    payment_id = intent['id']
                 )
-                
-                user.is_subscribed = True
-                user.save()
 
                 return Response(
                     {
-                        "amount":charge_obj.amount,
-                        "created":charge_obj.created,
-                        "stripe_charge_id":charge_obj.stripe_charge_id
+                        "message": "Payment intent created successfully",
+                        "amount": c_amount,
+                        "payment_id":intent['id'],
+                        "client_secret":intent['client_secret'],
+                        "publish_key":"pk_test_51N1vtNHYlHkFMKo7k8hRgsZ2oAjE6pfllmeRZJfau9OVZHmPB5gF5xmAFBiAxUQ2zMguR9n86BnBhW3Sey6plAlO00QrEq8Rgm"
+
                     },
                     status=status.HTTP_201_CREATED
                 )

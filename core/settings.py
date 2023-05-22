@@ -231,9 +231,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'#oke
 EMAIL_HOST = 'smtp.gmail.com'#oke
 
 EMAIL_PORT = '587'#oke
-EMAIL_HOST_USER = ''#leave here your genuine email
+EMAIL_HOST_USER = 'lawyertrive@gmail.com'#leave here your genuine email
 #EMAIL_HOST_PASSWORD = 'zqrgvttkmlpxuqjy'#leave here your genuine password of your email. keep it in mind, as the password should in encrypted condition 
-EMAIL_HOST_PASSWORD = 'zqrgvttkmlpxuqjy'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True#oke
 #oke
 
@@ -270,4 +270,5 @@ TIME_ZONE = 'Asia/Dhaka'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 

@@ -6,15 +6,4 @@ class ChargeSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Charge
-        fields = (
-            'id',
-            'amount',
-            'created',
-            'stripe_charge_id',
-            'user',
-            'currency',
-            'number',
-            'exp_month',
-            'exp_year',
-            'cvc'
-        )
+        fields = ("__all__")

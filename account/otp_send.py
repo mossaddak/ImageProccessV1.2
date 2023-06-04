@@ -17,19 +17,13 @@ def send_otp_via_email(email):
         'otp':f"{otp}"
     }
     html_template = 'verified_emaii_otp.html'
-
-    print("html_template==============================================================>", type(html_template))
-
-
-
-
     html_message = render_to_string(html_template, context=mydict)
     subject = 'Account Verification OTP'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     message = EmailMessage(subject, html_message, email_from, recipient_list)
     message.content_subtype = 'html'
-    #message.send()
+    message.send()
     user_obj = User.objects.get(email=email)
     user_obj.otp = otp
     user_obj.save()

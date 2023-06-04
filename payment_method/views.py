@@ -60,7 +60,8 @@ class StripePaymentView(APIView):
                         "amount": c_amount,
                         "payment_id":intent['id'],
                         "client_secret":intent['client_secret'],
-                        "publish_key":"pk_test_51N1vtNHYlHkFMKo7k8hRgsZ2oAjE6pfllmeRZJfau9OVZHmPB5gF5xmAFBiAxUQ2zMguR9n86BnBhW3Sey6plAlO00QrEq8Rgm"
+                        "publish_key":"pk_test_51N1vtNHYlHkFMKo7k8hRgsZ2oAjE6pfllmeRZJfau9OVZHmPB5gF5xmAFBiAxUQ2zMguR9n86BnBhW3Sey6plAlO00QrEq8Rgm",
+                        "profile_picture" : []
 
                     },
                     status=status.HTTP_201_CREATED
@@ -107,10 +108,10 @@ class VerifyPayment(APIView):
                                 "first_name": charge.user.first_name,
                                 "last_name": charge.user.last_name,
                                 "email": charge.user.email,
+                                "profile_picture":[],
                                 "is_superuser": charge.user.is_superuser,
                                 "is_subscribed": charge.user.is_subscribed,
                                 "is_verified": charge.user.is_verified
-
                             }
                         },
                         status=status.HTTP_201_CREATED

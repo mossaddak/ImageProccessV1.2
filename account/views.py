@@ -109,7 +109,7 @@ class VerifyOTPview(APIView):
                 user = User.objects.filter(otp=otp)
 
                 # if user.filter(verified=False).exists():
-                #print("OTPUser=====================================>", user)
+                print("OTPUser=====================================>", user)
                 if not user.exists():
                     return Response(
                         {
